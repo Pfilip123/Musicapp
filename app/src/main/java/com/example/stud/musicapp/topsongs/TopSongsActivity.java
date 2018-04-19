@@ -3,6 +3,7 @@ package com.example.stud.musicapp.topsongs;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,12 +19,16 @@ import retrofit2.Response;
 
 public class TopSongsActivity extends AppCompatActivity {
 
+    RecyclerView rvList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_songs);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled( true ); //górny pasek aplikacji
+
+        rvList = findViewById(R.id.rvList);
 
         Call<TrendingList> trendingListCall = Apiservice.getService().getTrendingList( "us" ,
                 "itunes", "singles");
