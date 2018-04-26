@@ -32,12 +32,21 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
 
     @Override
     public void onBindViewHolder(TopSongsViewHolders holder, int position) {
-        TrendingSingle trendingSingle = trending.get(position);
+        final TrendingSingle trendingSingle = trending.get(position);
 
         holder.tvPlace.setText(String.valueOf(trendingSingle.intChartPlace));
         holder.tvTrack.setText(trendingSingle.strTrack);
         holder.tvArtist.setText(trendingSingle.strArtist);
         holder.tvAlbum.setText(trendingSingle.strAlbum);
+        holder.llContainer.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),SongDetailsActivity.class );
+                intent.putExtra(SongDetailsActivity.TRACK, trendingSingle.strTrack);
+                intent.putExtra(SongDetailsActivity.ARTIST, trendingSingle.strArtist);
+                intent.putExtra(SongDetailsActivity.TRACK_ID, trendingSingle.idTrack);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -63,16 +72,7 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
             tvArtist = itemView.findViewById(R.id.tvArtist);
             tvAlbum = itemView.findViewById(R.id.tvAlbum);
 
-            holder.llContainer.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(),SongDetailsActivity.class );
-                    Intent intent = new Intent(v.getContext(),SongDetailsActivity.class );
-                    intent.putExtra(SongDetailsActivity.TRACK,trendingSungle.strTrack);
-                    intent.putExtra(SongDetailsActivity.ARTIST, trendingSingle.strArtist);
-                    intent.putExtra(SongDetailsActivity.TRACK_ID, trendingSingle.idTrack);
-                    v.getContext().startActivity(intent);
-                }
-            });
+
         }
     }
 
