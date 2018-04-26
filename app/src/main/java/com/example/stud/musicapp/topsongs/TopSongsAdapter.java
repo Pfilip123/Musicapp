@@ -66,7 +66,7 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
         public TopSongsViewHolders(View itemView) {
             super(itemView);
 
-            //llContainer = itemView.findViewById(R.id.llContainer);
+            llContainer = itemView.findViewById(R.id.llContainer);
             tvPlace = itemView.findViewById(R.id.tvPlace);
             tvTrack = itemView.findViewById(R.id.tvTrack);
             tvArtist = itemView.findViewById(R.id.tvArtist);
