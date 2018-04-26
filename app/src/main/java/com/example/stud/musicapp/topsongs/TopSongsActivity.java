@@ -34,6 +34,7 @@ public class TopSongsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_songs);
 
+        rvList = findViewById(R.id.rvList);
         getSupportActionBar().setDisplayHomeAsUpEnabled( true ); //górny pasek aplikacji
         TopSongsAdapter topSongsAdapter = new TopSongsAdapter(trendingSingles);
         rvList.setAdapter(topSongsAdapter);
@@ -43,7 +44,7 @@ public class TopSongsActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
 rvList.setLayoutManager(linearLayoutManager);
 
-        rvList = findViewById(R.id.rvList);
+
 
         Call<TrendingList> trendingListCall = Apiservice.getService().getTrendingList( "us" ,
                 "itunes", "singles");

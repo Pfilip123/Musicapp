@@ -1,9 +1,12 @@
 package com.example.stud.musicapp.topsongs;
 
+import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.stud.musicapp.R;
@@ -44,18 +47,32 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
 
     public class TopSongsViewHolders extends RecyclerView.ViewHolder {
 
+        LinearLayout llContainer;
         TextView tvPlace;
         TextView tvTrack;
         TextView tvArtist;
         TextView tvAlbum;
 
+
         public TopSongsViewHolders(View itemView) {
             super(itemView);
 
+            //llContainer = itemView.findViewById(R.id.llContainer);
             tvPlace = itemView.findViewById(R.id.tvPlace);
             tvTrack = itemView.findViewById(R.id.tvTrack);
             tvArtist = itemView.findViewById(R.id.tvArtist);
             tvAlbum = itemView.findViewById(R.id.tvAlbum);
+
+            holder.llContainer.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(),SongDetailsActivity.class );
+                    Intent intent = new Intent(v.getContext(),SongDetailsActivity.class );
+                    intent.putExtra(SongDetailsActivity.TRACK,trendingSungle.strTrack);
+                    intent.putExtra(SongDetailsActivity.ARTIST, trendingSingle.strArtist);
+                    intent.putExtra(SongDetailsActivity.TRACK_ID, trendingSingle.idTrack);
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 
