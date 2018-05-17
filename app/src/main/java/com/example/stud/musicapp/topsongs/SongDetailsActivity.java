@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,6 +65,22 @@ public class SongDetailsActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.itemFavorite:
+                Toast.makeText(this, "TODO", Toast.LENGTH_SHORT).show();
+    return true;
+    default:
+        return super.onOptionsItemSelected(item);
+        }
+
+
+
+
+    }
+
     private void showData(Track track) {
         TextView tvAlbum = findViewById(R.id.tvAlbum);
         TextView tvGenre = findViewById(R.id.tvGenre);
@@ -94,6 +111,8 @@ public class SongDetailsActivity extends AppCompatActivity {
         return true ;
     }
 
-
+    private void addRemoveFavourite(){
+    Toast.makeText(this, "TODO", Toast.LENGTH_SHORT).show();
+    }
 
 }
