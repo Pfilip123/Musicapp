@@ -18,6 +18,8 @@ import com.example.stud.musicapp.api.Track;
 import com.example.stud.musicapp.api.Tracks;
 import com.example.stud.musicapp.database.Favourite;
 
+import java.util.Date;
+
 import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -128,11 +130,40 @@ public class SongDetailsActivity extends AppCompatActivity {
                 .equalTo( "trackId" , trackId )
                 .findFirst();
         if (favorite == null ) {
-// TODO brak w ulubionych
+            addToFavorites(realm);
         } else {
-// TODO istnieje w ulubionych
+            removeFromFavorites(realm, favorite);
+        }
+    }
+
+
+        private void addToFavorites(Realm realm) {
+            realm.executeTransaction( new Realm.Transaction() {
+                @Override
+                public void execute( @NonNull Realm realm) {
+                    Favourite favorite = realm.createObject(Favourite. class );
+                    favorite.setArtist( artist );
+                    favorite.setTrack( track );
+                    favorite.setTrackId( trackId );
+                    favorite.setDate( new Date());
+                    Toast.makeText(SongDetailsActivity. this , "Dodano do ulubionych" ,
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        private void removeFromFavorites(Realm realm, final Favourite favorite) {
+
+            realm.executeTransaction( new Realm.Transaction() {
+                @Override
+                public void execute( @NonNull Realm realm){
+                    favorite.deleteFromRealm();
+                    Toast.makeText (SongDetailsActivity. this , "Usunięto z ulubionych" ,
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
 
     }
 
-}
+
