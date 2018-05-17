@@ -16,7 +16,9 @@ import com.example.stud.musicapp.R;
 import com.example.stud.musicapp.api.Apiservice;
 import com.example.stud.musicapp.api.Track;
 import com.example.stud.musicapp.api.Tracks;
+import com.example.stud.musicapp.database.Favourite;
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,6 +28,12 @@ public class SongDetailsActivity extends AppCompatActivity {
     public static final String TRACK="track";
     public static final String ARTIST="artist";
     public static final String TRACK_ID="track_id";
+
+    String track;
+    String artist;
+    int trackId;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +42,9 @@ public class SongDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent =getIntent();
-        String track =intent.getStringExtra(TRACK);
-        String artist = intent.getStringExtra(ARTIST);
-        int trackId = intent.getIntExtra( TRACK_ID , 0 );
+         track =intent.getStringExtra(TRACK);
+         artist = intent.getStringExtra(ARTIST);
+         trackId = intent.getIntExtra( TRACK_ID , 0 );
 
 
         getSupportActionBar().setTitle(TRACK);
@@ -112,7 +120,19 @@ public class SongDetailsActivity extends AppCompatActivity {
     }
 
     private void addRemoveFavourite(){
-    Toast.makeText(this, "TODO", Toast.LENGTH_SHORT).show();
+
+        Realm realm = Realm.getDefaultInstance();
+
+        Favourite favorite = realm
+                .where(Favourite.class )
+                .equalTo( "trackId" , trackId )
+                .findFirst();
+        if (favorite == null ) {
+// TODO brak w ulubionych
+        } else {
+// TODO istnieje w ulubionych
+        }
+
     }
 
 }

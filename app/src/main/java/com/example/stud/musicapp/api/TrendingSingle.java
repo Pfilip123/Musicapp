@@ -6,6 +6,7 @@ package com.example.stud.musicapp.api;
 
 public class TrendingSingle {
 
+    public int idAlbum; //dopisane ręcznie
     public int idArtist ;
     public int idTrack ;
     public int idTrend ;
