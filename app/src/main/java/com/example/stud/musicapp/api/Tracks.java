@@ -7,9 +7,5 @@ package com.example.stud.musicapp.api;
 import java.util.List;
 
 public class Tracks {
-    public String strAlbum ;
-    public String strDescriptionEN ;
-    public String strGenre ;
-    public String strStyle ;
-    public String strTrackThumb ;
+    public List<Track> track;
 }
