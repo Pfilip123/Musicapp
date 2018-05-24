@@ -41,7 +41,6 @@ public class SearchAlbumActivity extends AppCompatActivity {
 
     Button bSearch = findViewById(R.id.bSearch);
     bSearch.setOnClickListner(new View.OnClickListener()
-
     {
 
         public void onClickView (View view){
@@ -53,29 +52,22 @@ public class SearchAlbumActivity extends AppCompatActivity {
     });
 }
 private void rememberQuery(String query) {
-
+    SharedPreferences.Editor editor = sharedPreferences .edit();
+    editor.putString( "query" , query);
+    editor.apply();
 }
     getSupportActionBar();
         setDisplayHomeAsUpEnabled(true);
+
+        private void 
         sharedPreferences = getPreferences(MODE_PRIVATE);
 
         String query = etQuery.getText().toString();
 
         rememberQuery(query);
 
-    });
-
-    private void rememberQuery(String query) {
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("query", query);
-        editor.apply();
-    }
-
-
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }
-}
-}
+    }}
+
