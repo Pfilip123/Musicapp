@@ -31,9 +31,9 @@ public class SongDetailsActivity extends AppCompatActivity {
     public static final String ARTIST="artist";
     public static final String TRACK_ID="track_id";
 
-    String track;
-    String artist;
-    int trackId;
+  private   String track;
+  private   String artist;
+  private  int trackId;
 
 
     @Override
@@ -44,6 +44,7 @@ public class SongDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent =getIntent();
+
          track =intent.getStringExtra(TRACK);
          artist = intent.getStringExtra(ARTIST);
          trackId = intent.getIntExtra( TRACK_ID , 0 );

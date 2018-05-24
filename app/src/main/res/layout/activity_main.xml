@@ -4,14 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="2"
     tools:context="com.example.stud.musicapp.MainActivity">
 
    <Button
-     android:id="@+id/top_song"
-    android:layout_width="match_parent"
-       android:layout_height="0dp"
-       android:layout_weight="1"
-        android:text="@string/top_songs"
-       />
+       android:id="@+id/top_song"
+       android:layout_width="267dp"
+       android:layout_height="60dp"
+       android:layout_weight="2"
+       android:text="@string/top_songs"
+       tools:layout_editor_absoluteX="5dp"
+       tools:layout_editor_absoluteY="16dp" />
+
+   <Button
+       android:id="@+id/bFavourites"
+       android:layout_width="283dp"
+       android:layout_height="70dp"
+       android:layout_marginTop="104dp"
+       android:layout_weight="2"
+       android:text="@string/favorites"
+       app:layout_constraintTop_toTopOf="parent"
+       tools:layout_editor_absoluteX="0dp" />
+
 
 </android.support.constraint.ConstraintLayout>
