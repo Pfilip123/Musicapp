@@ -23,8 +23,12 @@
             android:name=".topsongs.TopSongsActivity"
             android:label="@string/top_songs" />
         <activity android:name=".topsongs.SongDetailsActivity" />
-        <activity android:name=".favourites.FavouritesActivity"
-            android:label="@string/favourites" />
+        <activity
+            android:name=".favourites.FavouritesActivity"
+            android:label="@string/favourites"
+           />
+        <activity android:name=".seachAlbum.SearchAlbumActivity"
+            android:label="@string/search_album"></activity>
     </application>
 
 </manifest>

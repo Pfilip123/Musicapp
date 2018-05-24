@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.stud.musicapp.favourites.FavouritesActivity;
+import com.example.stud.musicapp.seachAlbum.SearchAlbumActivity;
 import com.example.stud.musicapp.topsongs.TopSongsActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this, FavouritesActivity.class);
+                startActivity(intent);
+            };
+        });
+        Button bsearchalbum = findViewById(R.id.bSearchAlbum);
+        bsearchalbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, SearchAlbumActivity.class);
                 startActivity(intent);
             };
         });

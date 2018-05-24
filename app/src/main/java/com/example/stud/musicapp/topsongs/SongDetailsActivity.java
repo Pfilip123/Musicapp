@@ -81,13 +81,11 @@ public class SongDetailsActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.itemFavorite:
-                Toast.makeText(this, "TODO", Toast.LENGTH_SHORT).show();
+                addRemoveFavourite();
     return true;
     default:
         return super.onOptionsItemSelected(item);
         }
-
-
 
 
     }
