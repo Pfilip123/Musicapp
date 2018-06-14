@@ -9,4 +9,8 @@
     <string name="search_album">Zanjdź album</string>
     <string name="search">Szukaj</string>
     <string name="eneter_artist_name">Podaj nazwę wykonawcy</string>
+    <string name="year_released">rok</string>
+    <string name="sales">sprzedane</string>
+    <string name="score">wyniki</string>
+    <string name="sort_by_name">sortij_wg_nazwy</string>
 </resources>
