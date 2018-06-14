@@ -1,6 +1,7 @@
 package com.example.stud.musicapp.seachAlbum;
 
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +10,14 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.stud.musicapp.R;
+import com.example.stud.musicapp.api.Apiservice;
+import com.example.stud.musicapp.api.SearchAlbums;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class SearchAlbumActivity extends AppCompatActivity {
     EditText etQuery;
@@ -27,47 +34,67 @@ public class SearchAlbumActivity extends AppCompatActivity {
         etQuery = findViewById(R.id.etQuery);
         rvList = findViewById(R.id.rvList);
 
-        String artist = sharedPreferences.getString("query", null);
-        etQuery.setText(artist);
-
-
         try {
             int zapisanaWartosc = sharedPreferences.getInt("moja_wartosc", 0);
         } catch (ClassCastException e) {
             Log.e("TAG", "Inny wyjątek", e);
         }
+        String artist = sharedPreferences.getString("query", null);
+        etQuery.setText(artist);
+
+
+        Button bSearch = findViewById(R.id.bSearch);
+        bSearch.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                String query = etQuery.getText().toString();
+                rememberQuery(query);
+            }
+        });
+    }
+
+    private void searchAlbums(String query) {
+        getSupportActionBar().setSubtitle(query);
+        if (query == null || query.isEmpty()) {
+            Toast.makeText(this, "Pusta fraza", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Call<SearchAlbums> searchAlbumsCall = ApiService.getService().searchAlbums(query);
+        searchAlbumsCall.enqueue(new Callback<SearchAlbums>() {
+            @Override
+            public void onResponse(@NonNull Call<SearchAlbums> call, @NonNull
+                    Response<SearchAlbums> response) {
+                SearchAlbums searchAlbums = response.body();
+                if (searchAlbums == null || searchAlbums.album == null ||
+                        searchAlbums.album.isEmpty()) {
+                    Toast.makeText(SearchAlbumActivity.this, "Brak wyników",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(SearchAlbumActivity.this, "Znaleziono " +
+                        searchAlbums.album.size() + " wyników", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SearchAlbums> call, Throwable t) {
+                Toast.makeText(SearchAlbumActivity.this, "Błąd pobierania danych: " +
+                        t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
-    Button bSearch = findViewById(R.id.bSearch);
-    bSearch.setOnClickListner(new View.OnClickListener()
-    {
+    //  getSupportActionBar();
+    //   setDisplayHomeAsUpEnabled(true);
 
-        public void onClickView (View view){
+    private void sharedPreferences = getPreferences(MODE_PRIVATE);
 
-        String query = etQuery.getText().toString();
-        rememberQuery(query);
+    String query = etQuery.getText().toString();
 
-    }
-    });
-}
-private void rememberQuery(String query) {
-    SharedPreferences.Editor editor = sharedPreferences .edit();
-    editor.putString( "query" , query);
-    editor.apply();
-}
-    getSupportActionBar();
-        setDisplayHomeAsUpEnabled(true);
-
-        private void 
-        sharedPreferences = getPreferences(MODE_PRIVATE);
-
-        String query = etQuery.getText().toString();
-
-        rememberQuery(query);
+    rememberQuery(query);
 
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }}
-
+    }
+}
